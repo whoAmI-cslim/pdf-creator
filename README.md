@@ -2,7 +2,7 @@
 
 A modern web application that allows users to upload Excel sheets containing financial data, view and edit the data in a dynamic table, and generate professional PDF reports.
 
-![Financial Report Generator](https://github.com/your-username/financial-report-generator/raw/main/public/preview.png)
+![Financial Report Generator](https://github.com/whoAmI-cslim/pdf-creator/blob/main/example.png)
 
 ## Features
 
