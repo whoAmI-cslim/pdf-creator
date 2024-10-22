@@ -52,6 +52,8 @@ yarn dev
 1. Click the "Select Excel File" button
 2. Choose your Excel file (.xlsx or .xls)
 3. Wait for the file to be processed
+4. A file named 'Financial Sample.xlsx' is included when you download this project.
+5. This file was used to create the outputs. 
 
 ### Working with Data
 
