@@ -26,7 +26,7 @@ A modern web application that allows users to upload Excel sheets containing fin
 1. Clone the repository:
 ```bash
 git clone https://github.com/whoAmI-cslim/pdf-creator.git
-cd financial-report-generator
+cd pdf-creator
 ```
 
 2. Install dependencies:
