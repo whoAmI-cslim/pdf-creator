@@ -10,7 +10,7 @@ export async function generatePDF(data: FinancialData[], headers: string[], file
   // Get page dimensions
   const pageWidth = doc.internal.pageSize.getWidth();
   const pageHeight = doc.internal.pageSize.getHeight();
-  const margin = 14;
+  const margin = 12;
   const availableWidth = pageWidth - (margin * 2);
   
   // Calculate optimal font sizes based on page size
