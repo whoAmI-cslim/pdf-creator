@@ -4,11 +4,11 @@ import { ModeToggle } from '@/components/mode-toggle';
 export default function Home() {
   return (
     <main className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
+      <div className=" container mx-auto p-8 max-w-full">
         <div className="absolute right-4 top-4">
           <ModeToggle />
         </div>
-        <div className="max-w-3xl mx-auto">
+        <div className="mx-auto">
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold tracking-tight mb-4">
               Financial Report Generator

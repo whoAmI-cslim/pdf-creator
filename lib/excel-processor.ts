@@ -1,39 +1,40 @@
 import * as XLSX from 'xlsx';
 
 export interface FinancialData {
-  date: string;
-  description: string;
-  amount: number;
-  category: string;
+  [key: string]: any;
 }
 
-export async function processExcel(file: File): Promise<FinancialData[]> {
+export async function processExcel(file: File): Promise<{
+  headers: string[];
+  data: FinancialData[];
+}> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
 
     reader.onload = (e) => {
       try {
-        const data = new Uint8Array(e.target?.result as ArrayBuffer);
-        const workbook = XLSX.read(data, { type: 'array' });
-        
-        // Assume first sheet
+        const data = e.target?.result;
+        const workbook = XLSX.read(data, { type: 'binary' });
         const firstSheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[firstSheetName];
         
-        // Convert to JSON
-        const jsonData = XLSX.utils.sheet_to_json(worksheet);
-        
-        // Transform and validate data
-        const financialData: FinancialData[] = jsonData.map((row: any) => ({
-          date: row.date || row.Date || '',
-          description: row.description || row.Description || '',
-          amount: parseFloat(row.amount || row.Amount || 0),
-          category: row.category || row.Category || 'Uncategorized',
-        }));
+        // Convert to JSON with headers
+        const jsonData = XLSX.utils.sheet_to_json(worksheet, { 
+          raw: false,
+          dateNF: 'yyyy-mm-dd',
+          defval: '' // Default value for empty cells
+        });
 
-        resolve(financialData);
+        // Extract headers from the first row
+        const headers = Object.keys(jsonData[0] || {});
+        
+        resolve({
+          headers,
+          data: jsonData as FinancialData[]
+        });
       } catch (error) {
-        reject(error);
+        console.error('Error processing Excel:', error);
+        reject(new Error('Failed to process Excel file'));
       }
     };
 
@@ -41,6 +42,6 @@ export async function processExcel(file: File): Promise<FinancialData[]> {
       reject(new Error('Failed to read file'));
     };
 
-    reader.readAsArrayBuffer(file);
+    reader.readAsBinaryString(file);
   });
 }
